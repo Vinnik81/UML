@@ -1,4 +1,4 @@
-#include<iostream>
+п»ї#include<iostream>
 #include<thread>
 #include<conio.h>
 #include<Windows.h>
@@ -61,7 +61,7 @@ public:
 
 class Engine
 {
-	double consumption;		//расход на 100 км
+	double consumption;		//СЂР°СЃС…РѕРґ РЅР° 100 РєРј
 	double consumption_per_second;
 	double default_consumption_per_second;
 	bool is_started;
@@ -141,8 +141,8 @@ class Car
 	struct Control
 	{
 		std::thread panel_thread;
-		std::thread engine_idle_thread;		//холостой ход двигателя
-		std::thread free_wheeling_thread;	//движение по инерции
+		std::thread engine_idle_thread;		//С…РѕР»РѕСЃС‚РѕР№ С…РѕРґ РґРІРёРіР°С‚РµР»СЏ
+		std::thread free_wheeling_thread;	//РґРІРёР¶РµРЅРёРµ РїРѕ РёРЅРµСЂС†РёРё
 	}control;
 public:
 	Car(int consumption, int volume, int max_speed) :
@@ -210,10 +210,10 @@ public:
 			case Enter:driver_inside ? get_out() : get_in(); break;
 			case 'F': case 'f': 
 				double fuel;
-				cout << "Введите объём топлива: "; cin >> fuel;
+				cout << "Р’РІРµРґРёС‚Рµ РѕР±СЉС‘Рј С‚РѕРїР»РёРІР°: "; cin >> fuel;
 				fill(fuel);
 				break;
-			case 'I': case 'i': //Ignition - зажигание
+			case 'I': case 'i': //Ignition - Р·Р°Р¶РёРіР°РЅРёРµ
 				engine.started() ? stop_engine() : start_engine();
 				break;
 			case 'W': case 'w':
@@ -302,7 +302,7 @@ void main()
 	do
 	{
 		tank.info();
-		cout << "Введите объём топлива: "; cin >> amount;
+		cout << "Р’РІРµРґРёС‚Рµ РѕР±СЉС‘Рј С‚РѕРїР»РёРІР°: "; cin >> amount;
 		tank.fill(amount);
 	} while (true);
 #endif // TANK_CHECK
