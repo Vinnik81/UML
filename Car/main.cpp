@@ -1,4 +1,5 @@
 ﻿#include<iostream>
+#include<string>
 #include<thread>
 #include<conio.h>
 #include<Windows.h>
@@ -166,14 +167,14 @@ public:
 
 	void speed_switch(double speed)const
 	{
-		string switch_speed[] = { "N", "1", "1", "3", "4", "5", "6"};
+		string switch_speed[] = { "N", "1", "2", "3", "4", "5", "6"};
 		if (speed == 0 && MIN_TURNS)cout << switch_speed[0];
-		else if (speed == 40 && turns >= DEFAULT_TURNS && turns <= MAX_TURNS)cout << switch_speed[1];
-		else if (speed == 60 && turns >= DEFAULT_TURNS && turns <= MAX_TURNS)cout << switch_speed[2];
-		else if (speed == 90 && turns >= DEFAULT_TURNS && turns <= MAX_TURNS)cout << switch_speed[3];
-		else if (speed == 120 && turns >= DEFAULT_TURNS && turns <= MAX_TURNS)cout << switch_speed[4];
-		else if (speed == 200 && turns >= DEFAULT_TURNS && turns <= MAX_TURNS)cout << switch_speed[5];
-		else if (speed == 300 && turns >= DEFAULT_TURNS && turns <= MAX_TURNS)cout << switch_speed[6];
+		else if (speed <= 40 || turns >= DEFAULT_TURNS && turns <= MAX_TURNS)cout << switch_speed[1];
+		else if (speed <= 60 || turns >= DEFAULT_TURNS && turns <= MAX_TURNS)cout << switch_speed[2];
+		else if (speed <= 90 || turns >= DEFAULT_TURNS && turns <= MAX_TURNS)cout << switch_speed[3];
+		else if (speed <= 120 || turns >= DEFAULT_TURNS && turns <= MAX_TURNS)cout << switch_speed[4];
+		else if (speed <= 200 || turns >= DEFAULT_TURNS && turns <= MAX_TURNS)cout << switch_speed[5];
+		else if (speed <= 300 || turns >= DEFAULT_TURNS && turns <= MAX_TURNS)cout << switch_speed[6];
 	}
 };
 
@@ -193,7 +194,7 @@ class Car
 	int speed;
 	const int MAX_SPEED;
 	int accelleration;
-	string switch_speed;		//переключение скоростей
+	std::string switch_speed;	//переключение скоростей
 	int turns;
 	const int TURNS;				//обороты
 	struct Control
@@ -387,7 +388,8 @@ public:
 			cout << endl;
 			cout << "Speed:\t" << speed << " km/h\n";
 			for (int i = 0; i < turns / 100; i++)cout << "!";
-			cout << "Switch_speed: ";  transmision.speed_switch(speed);
+			cout << "Switch_speed: ";
+			transmision.speed_switch(speed);
 			cout << endl;
 			cout << "Turns:\t" << turns << " rpm\n";
 			cout << "Fuel level: " << tank.get_fuel_level() << " liters.";
@@ -400,7 +402,7 @@ public:
 			}
 			cout << endl;
 			cout << "Engine is: " << (engine.started() ? "started" : "stopped") << endl;
-			cout << "Transmision is: " << (transmision.trans_is_on() ? "ON" : "OFF") << endl;
+			cout << "Transmision is: " << (transmision.trans_is_on() ? "ON" : "PARKING") << endl;
 			cout << "Consumption per second: " << engine.get_consumption_per_second() << " liters.\n";
 			std::this_thread::sleep_for(200ms);
 		}
@@ -431,6 +433,4 @@ void main()
 
 	Car bmv(10, 60, 250, 2400);
 	bmv.control_car();
-
-
 }
